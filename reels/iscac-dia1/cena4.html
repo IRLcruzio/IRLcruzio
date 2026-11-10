@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ISCAC · DIA 1 · Cena 4 — Modo Guerreiro (9:16)</title>
+<style>
+  :root{
+    --night:#08070c; --wall-top:#3d342d; --wall-bot:#6a5a4b; --wood:#d8b98c; --chair:#6d1a26;
+    --ink:#141218; --skin:#f6f1e7; --like:#ff2d55; --comment:#22b8ff; --repost:#2ee07a; --gold:#ffd23f;
+  }
+  html,body{margin:0;height:100%;background:#000;display:grid;place-items:center;font-family:Inter,"Inter Display",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .reel{height:100vh;aspect-ratio:9/16;max-width:100vw;position:relative;overflow:hidden;background:var(--night)}
+  .reel svg{width:100%;height:100%;display:block}
+
+  /* ---------- animações ---------- */
+  .neon{animation:flicker 4s infinite}
+  @keyframes flicker{0%,92%,96%,100%{opacity:1}94%{opacity:.35}}
+  .dim{animation:dim .6s ease-out both}
+  @keyframes dim{from{opacity:0}to{opacity:.55}}
+  .flash{animation:flash .5s .75s ease-out both}
+  @keyframes flash{0%{opacity:.75}100%{opacity:0}}
+
+  .joao{animation:shake .12s infinite;transform-box:fill-box}
+  @keyframes shake{0%{transform:translate(0,0)}25%{transform:translate(2px,-2px)}50%{transform:translate(-2px,1px)}75%{transform:translate(1px,2px)}100%{transform:translate(0,0)}}
+  .band{animation:band .55s .15s cubic-bezier(.2,1.4,.4,1) both}
+  @keyframes band{from{transform:translateY(-260px)}to{transform:translateY(0)}}
+  .tail{transform-box:fill-box;transform-origin:0% 50%;animation:tail .18s infinite alternate ease-in-out}
+  .tail.b{animation-delay:-.09s}
+  @keyframes tail{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
+  /* braço que aponta: alterna entre as 3 regras */
+  .point{transform-origin:546px 1213px;transform:rotate(-64deg);animation:point 1.35s infinite steps(1)}
+  @keyframes point{0%{transform:rotate(-64deg)}33.3%{transform:rotate(-57deg)}66.6%{transform:rotate(-50deg)}}
+  .jig{transform-origin:546px 1213px;animation:jig .07s infinite alternate}
+  @keyframes jig{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+  .fist{animation:fist .22s infinite alternate ease-in-out}
+  @keyframes fist{from{transform:translateY(-14px)}to{transform:translateY(14px)}}
+
+  .hud-in{animation:pop .45s cubic-bezier(.2,1.6,.4,1) both;transform-box:fill-box;transform-origin:center}
+  @keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+  .row{animation:slide .4s cubic-bezier(.2,1.3,.4,1) both}
+  .r1{animation-delay:.2s}.r2{animation-delay:.42s}.r3{animation-delay:.64s}
+  @keyframes slide{from{transform:translateX(-140px);opacity:0}to{transform:translateX(0);opacity:1}}
+  .row .hl{opacity:0;animation:hl 1.35s infinite steps(1)}
+  .r2 .hl{animation-delay:.45s}.r3 .hl{animation-delay:.9s}
+  @keyframes hl{0%{opacity:1}33.3%{opacity:0}}
+  .panel-border{animation:pulse 1.1s infinite ease-in-out}
+  @keyframes pulse{50%{stroke-opacity:.45}}
+  .blink{animation:blink .66s infinite steps(1)}
+  @keyframes blink{50%{fill:#fff}}
+  .levelup{animation:lv 1.2s .75s ease-out both}
+  @keyframes lv{0%{opacity:0;transform:scale(2.4)}20%{opacity:1;transform:scale(1)}80%{opacity:1}100%{opacity:0}}
+  .levelup{transform-box:fill-box;transform-origin:center}
+  .cta{animation:cta 1s 1.1s ease-out both}
+  @keyframes cta{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){*{animation-duration:0s!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+<div class="reel">
+<svg viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="João em modo guerreiro no Aquário do ISCAC à noite, com o painel de regras: Like, Comentário e Repost">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#06070f"/><stop offset="1" stop-color="#16112a"/></linearGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--wall-top)"/><stop offset="1" stop-color="var(--wall-bot)"/></linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e2721"/><stop offset="1" stop-color="#1c1815"/></linearGradient>
+    <linearGradient id="corr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#141118"/><stop offset="1" stop-color="#08070a"/></linearGradient>
+    <linearGradient id="top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfae80"/><stop offset="1" stop-color="#e2c497"/></linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffecbe" stop-opacity=".3"/><stop offset="1" stop-color="#ffecbe" stop-opacity="0"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff38a"/><stop offset="1" stop-color="#ff9b1a"/></linearGradient>
+    <radialGradient id="lamp"><stop offset="0" stop-color="#ffd696" stop-opacity=".4"/><stop offset="1" stop-color="#ffd696" stop-opacity="0"/></radialGradient>
+    <radialGradient id="red"><stop offset="0" stop-color="#ff1e28" stop-opacity=".35"/><stop offset="1" stop-color="#ff1e28" stop-opacity="0"/></radialGradient>
+    <radialGradient id="spot"><stop offset="0" stop-color="#ff3c3c" stop-opacity=".28"/><stop offset="1" stop-color="#ff3c3c" stop-opacity="0"/></radialGradient>
+    <radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".6"/></radialGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="softglow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="18"/></filter>
+    <clipPath id="headClip"><circle cx="540" cy="1340" r="97"/></clipPath>
+  </defs>
+
+  <!-- ===================== CENÁRIO: Aquário à noite (câmara desce 260px para dar espaço ao HUD) ===================== -->
+  <g id="scene" transform="translate(0,260)">
+    <rect x="0" y="-260" width="1080" height="460" fill="#120f0e"/>
+    <rect x="0" y="200" width="1080" height="440" fill="url(#sky)"/>
+    <g fill="#ffcf8a" opacity=".55"><rect x="120" y="470" width="4" height="4"/><rect x="380" y="520" width="4" height="4"/><rect x="610" y="455" width="4" height="4"/><rect x="820" y="560" width="4" height="4"/><rect x="990" y="500" width="4" height="4"/></g>
+    <g fill="#0b0a0c"><ellipse cx="80" cy="640" rx="140" ry="90"/><ellipse cx="330" cy="640" rx="120" ry="110"/><ellipse cx="620" cy="640" rx="150" ry="80"/><ellipse cx="900" cy="640" rx="130" ry="120"/></g>
+    <g stroke="#2a2522" stroke-width="14"><path d="M0 206H1080M270 200V640M540 200V640M810 200V640"/></g>
+    <!-- candeeiros pendentes em sino (fotos) -->
+    <g>
+      <g transform="translate(170 0)"><path d="M0 200V470" stroke="#0c0b0b" stroke-width="3"/><path d="M-22 470H22L62 540H-62Z" fill="#d9d2c4"/><circle cx="0" cy="560" r="260" fill="url(#lamp)"/><ellipse cx="0" cy="540" rx="58" ry="9" fill="#fff4d8"/></g>
+      <g transform="translate(540 0)"><path d="M0 200V470" stroke="#0c0b0b" stroke-width="3"/><path d="M-22 470H22L62 540H-62Z" fill="#d9d2c4"/><circle cx="0" cy="560" r="260" fill="url(#lamp)"/><ellipse cx="0" cy="540" rx="58" ry="9" fill="#fff4d8"/></g>
+      <g transform="translate(910 0)"><path d="M0 200V470" stroke="#0c0b0b" stroke-width="3"/><path d="M-22 470H22L62 540H-62Z" fill="#d9d2c4"/><circle cx="0" cy="560" r="260" fill="url(#lamp)"/><ellipse cx="0" cy="540" rx="58" ry="9" fill="#fff4d8"/></g>
+    </g>
+    <!-- parede de betão -->
+    <rect x="0" y="640" width="1080" height="560" fill="url(#wall)"/>
+    <path d="M270 640V1190M630 640V1190M990 640V1190" stroke="#000" stroke-opacity=".18" stroke-width="3"/>
+    <!-- néon ISCAC (estilizado) -->
+    <g class="neon" transform="translate(205 820)">
+      <circle r="260" fill="url(#red)"/>
+      <g fill="none" stroke="#ff2832" stroke-width="11" stroke-linecap="round" filter="url(#glow)">
+        <path d="M-62 22V-10A62 62 0 0 1 62 -10V22"/><path d="M-44 -10A44 44 0 0 1 44 -10"/><path d="M-26 -10A26 26 0 0 1 26 -10"/>
+      </g>
+      <text x="6" y="86" text-anchor="middle" font-family="'DejaVu Serif',Georgia,serif" font-weight="700" font-size="46" letter-spacing="10" fill="#ff323c" filter="url(#glow)">ISCAC</text>
+    </g>
+    <!-- relógio 02:47 -->
+    <rect x="780" y="740" width="190" height="82" rx="12" fill="#0d0b0b"/>
+    <text x="875" y="800" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-weight="700" font-size="56" fill="#ff4040" filter="url(#glow)">02:47</text>
+    <!-- fila de trás: candeeiro linear, mesa e colegas calmos -->
+    <rect x="0" y="1018" width="1080" height="12" fill="#8f9296"/><rect x="0" y="1030" width="1080" height="4" fill="#ffecbe" opacity=".9"/>
+    <g id="mini">
+      <g transform="translate(120 1062)"><rect x="-38" y="-22" width="76" height="80" rx="10" fill="#5e1a24"/><circle cy="-34" r="22" fill="var(--skin)" stroke="var(--ink)" stroke-width="5"/><circle cx="-7" cy="-32" r="2.6" fill="var(--ink)"/><circle cx="7" cy="-32" r="2.6" fill="var(--ink)"/><path d="M0 -12V50M0 4L-24 30-18 48M0 4L24 30 18 48" stroke="var(--ink)" stroke-width="5" fill="none" stroke-linecap="round"/></g>
+      <g transform="translate(320 1062)"><rect x="-38" y="-22" width="76" height="80" rx="10" fill="#5e1a24"/><circle cy="-34" r="22" fill="var(--skin)" stroke="var(--ink)" stroke-width="5"/><path d="M-24 -40A26 26 0 0 1 24 -40" stroke="#222" stroke-width="6" fill="none"/><rect x="-30" y="-44" width="10" height="20" rx="4" fill="#222"/><rect x="20" y="-44" width="10" height="20" rx="4" fill="#222"/><circle cx="-7" cy="-32" r="2.6" fill="var(--ink)"/><circle cx="7" cy="-32" r="2.6" fill="var(--ink)"/><path d="M0 -12V50M0 4L-24 30-18 48M0 4L24 30 18 48" stroke="var(--ink)" stroke-width="5" fill="none" stroke-linecap="round"/></g>
+      <g transform="translate(770 1062)"><rect x="-38" y="-22" width="76" height="80" rx="10" fill="#5e1a24"/><circle cy="-34" r="22" fill="var(--skin)" stroke="var(--ink)" stroke-width="5"/><circle cx="-7" cy="-32" r="2.6" fill="var(--ink)"/><circle cx="7" cy="-32" r="2.6" fill="var(--ink)"/><path d="M0 -12V50M0 4L-24 30-18 48M0 4L24 30 18 48" stroke="var(--ink)" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="-26" y="30" width="52" height="20" fill="#e9e4d8"/></g>
+      <g transform="translate(960 1062)"><rect x="-38" y="-22" width="76" height="80" rx="10" fill="#5e1a24"/><circle cy="-34" r="22" fill="var(--skin)" stroke="var(--ink)" stroke-width="5"/><circle cx="-7" cy="-32" r="2.6" fill="var(--ink)"/><circle cx="7" cy="-32" r="2.6" fill="var(--ink)"/><path d="M0 -12V50M0 4L-24 30-18 48M0 4L24 30 18 48" stroke="var(--ink)" stroke-width="5" fill="none" stroke-linecap="round"/></g>
+    </g>
+    <rect x="0" y="1112" width="1080" height="18" fill="#b99c74"/><rect x="0" y="1130" width="1080" height="10" fill="#86705a"/>
+    <rect x="90" y="1080" width="60" height="32" fill="#9fb3c8"/><rect x="930" y="1080" width="60" height="32" fill="#9fb3c8"/>
+    <rect x="0" y="1140" width="1080" height="520" fill="url(#floor)"/>
+  </g>
+
+  <!-- escurecimento cinematográfico -->
+  <rect class="dim" width="1080" height="1920" fill="#00000a"/>
+
+  <!-- ===================== JOÃO (modo guerreiro) + mesa caótica — iluminados por cima do escurecimento ===================== -->
+  <g id="hero" transform="translate(0,260)">
+    <circle cx="540" cy="1080" r="420" fill="url(#spot)"/>
+    <!-- candeeiro linear da mesa (fotos) -->
+    <rect x="84" y="880" width="12" height="460" fill="#9a9ea4"/><rect x="984" y="880" width="12" height="460" fill="#9a9ea4"/>
+    <rect x="64" y="860" width="952" height="30" rx="6" fill="#c8ccd1"/><rect x="74" y="888" width="932" height="6" fill="#fff5dc"/>
+    <path d="M74 894H1006L1090 1460H-10Z" fill="url(#beam)"/>
+    <!-- cadeira bordô -->
+    <rect x="415" y="1150" width="250" height="200" rx="26" fill="var(--chair)"/>
+    <g class="joao">
+      <!-- tronco -->
+      <path d="M540 1169V1345" stroke="var(--ink)" stroke-width="14" stroke-linecap="round"/>
+      <!-- braço esquerdo: punho a bater -->
+      <g class="fist"><path d="M534 1213L430 1180 455 1100" stroke="var(--ink)" stroke-width="13" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="455" cy="1100" r="18" fill="var(--ink)"/></g>
+      <!-- cabeça -->
+      <circle cx="540" cy="1080" r="95" fill="var(--skin)" stroke="var(--ink)" stroke-width="12"/>
+      <g fill="#5f3c78" fill-opacity=".45"><path d="M480 1102A26 12 0 0 0 532 1102Z"/><path d="M548 1102A26 12 0 0 0 600 1102Z"/></g>
+      <g fill="none" stroke="#502d64" stroke-opacity=".7" stroke-width="4"><path d="M488 1098Q506 1112 524 1098"/><path d="M556 1098Q574 1112 592 1098"/></g>
+      <circle cx="510" cy="1072" r="9" fill="var(--ink)"/><circle cx="578" cy="1072" r="9" fill="var(--ink)"/>
+      <circle cx="507" cy="1069" r="3" fill="#fff"/><circle cx="575" cy="1069" r="3" fill="#fff"/>
+      <path d="M526 1034L486 1050M554 1034L594 1050" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/>
+      <ellipse cx="540" cy="1130" rx="26" ry="30" fill="#3a0d12" stroke="var(--ink)" stroke-width="6"/><ellipse cx="540" cy="1146" rx="14" ry="8" fill="#e05a6a"/>
+      <!-- fita "CF I" -->
+      <g class="band">
+        <g clip-path="url(#headClip)" transform="translate(0,-260)"><rect x="430" y="1262" width="220" height="30" fill="#e01b2a"/><text x="540" y="1285" text-anchor="middle" font-family="'Inter Display',Inter,sans-serif" font-weight="900" font-size="24" fill="#fff">CF I</text></g>
+        <circle cx="631" cy="1018" r="13" fill="#e01b2a"/>
+        <path class="tail" d="M631 1014Q681 1000 741 1010L735 1028Q677 1022 631 1026Z" fill="#e01b2a"/>
+        <path class="tail b" d="M631 1018Q681 1030 741 1050L735 1068Q677 1052 631 1030Z" fill="#e01b2a"/>
+      </g>
+      <!-- braço direito: aponta freneticamente para as regras -->
+      <g class="point"><g class="jig"><path d="M546 1213L660 1213 780 1213" stroke="var(--ink)" stroke-width="13" fill="none" stroke-linecap="round"/><circle cx="790" cy="1213" r="15" fill="var(--ink)"/><path d="M790 1213H835" stroke="var(--ink)" stroke-width="9" stroke-linecap="round"/></g></g>
+    </g>
+    <!-- mesa: madeira clara + caos -->
+    <path d="M60 1330H1020L1090 1450H-10Z" fill="url(#top)"/>
+    <rect x="-10" y="1450" width="1100" height="34" fill="#a3825a"/>
+    <g transform="translate(150 1365) rotate(-7)"><rect x="-85" y="-30" width="170" height="62" rx="6" fill="#1d3f74"/><rect x="-85" y="22" width="170" height="10" fill="#f2efe6"/><text y="8" text-anchor="middle" font-family="'Inter Display',Inter,sans-serif" font-weight="900" font-size="28" fill="#fff">CF I</text></g>
+    <g fill="#f4f2ec"><rect x="230" y="1376" width="140" height="48" transform="rotate(14 300 1400)"/><rect x="350" y="1326" width="140" height="48" transform="rotate(-11 420 1350)"/><rect x="630" y="1396" width="140" height="48" transform="rotate(9 700 1420)"/><rect x="550" y="1336" width="140" height="48" transform="rotate(-23 620 1360)"/><rect x="750" y="1416" width="140" height="48" transform="rotate(17 820 1440)"/></g>
+    <g transform="translate(950 1385) rotate(10)"><rect x="-36" y="-30" width="72" height="60" rx="8" fill="#24262b"/><rect x="-28" y="-24" width="56" height="14" fill="#9fc3a0"/></g>
+    <rect x="760" y="1360" width="34" height="58" rx="6" fill="#2fd06a"/><rect x="760" y="1380" width="34" height="8" fill="#111"/>
+    <!-- torre de cafés (7) -->
+    <g transform="translate(860 1405)" fill="#f4f1ea">
+      <g id="cup"><path d="M-26 0H26L33 -52H-33Z"/><rect x="-29" y="-34" width="58" height="16" fill="#8a5a33"/></g>
+      <use href="#cup" y="-50"/><use href="#cup" y="-100"/><use href="#cup" y="-150"/><use href="#cup" y="-200"/><use href="#cup" y="-250"/><use href="#cup" y="-300"/>
+    </g>
+    <!-- vidro do Aquário: calendário colado + caixilhos + corredor -->
+    <rect x="0" y="-260" width="1080" height="1920" fill="#7890be" opacity=".05"/>
+    <g transform="translate(790 720) rotate(3.4)">
+      <rect x="-150" y="-110" width="300" height="230" fill="#fbfaf5"/><rect x="-150" y="-110" width="300" height="58" fill="#d61e2b"/>
+      <text y="-66" text-anchor="middle" font-family="'Inter Display',Inter,sans-serif" font-weight="900" font-size="38" fill="#fff">EXAME CF I</text>
+      <text y="-14" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="28" fill="#222">FALTAM</text>
+      <text y="64" text-anchor="middle" font-family="'Inter Display',Inter,sans-serif" font-weight="900" font-size="76" fill="#d61e2b">5 DIAS</text>
+    </g>
+    <rect x="-10" y="-260" width="32" height="1920" fill="#2f3238"/><rect x="1058" y="-260" width="32" height="1920" fill="#2f3238"/>
+    <rect x="0" y="622" width="1080" height="26" fill="#2f3238"/><rect x="0" y="1640" width="1080" height="34" fill="#2f3238"/>
+    <rect x="0" y="1674" width="1080" height="260" fill="url(#corr)"/>
+  </g>
+
+  <!-- flash de "level up" -->
+  <rect class="flash" width="1080" height="1920" fill="#fff078" opacity="0"/>
+
+  <!-- ===================== HUD de videojogo ===================== -->
+  <g id="hud">
+    <g class="hud-in"><rect x="60" y="150" width="250" height="70" rx="35" fill="var(--gold)"/><text x="95" y="200" font-family="'Inter Display',Inter,sans-serif" font-weight="900" font-size="40" fill="#111">DIA 1 / 5</text></g>
+    <g class="hud-in"><rect x="560" y="150" width="460" height="70" rx="35" fill="#000" fill-opacity=".75" stroke="var(--gold)" stroke-width="4"/><text class="blink" x="592" y="197" font-family="'JetBrains Mono',monospace" font-weight="800" font-size="34" fill="var(--gold)">LANÇAMENTOS: ???</text></g>
+
+    <g class="hud-in" text-anchor="middle">
+      <text x="540" y="320" font-family="'Inter Display',Inter,sans-serif" font-weight="900" font-size="74" stroke="#111" stroke-width="14" stroke-linejoin="round" fill="#111">MODO GUERREIRO</text>
+      <text x="540" y="320" font-family="'Inter Display',Inter,sans-serif" font-weight="900" font-size="74" fill="url(#gold)" filter="url(#glow)">MODO GUERREIRO</text>
+      <text x="540" y="368" font-family="Inter,sans-serif" font-weight="900" font-size="34" fill="#fff">ATIVADO ⚡ REGRAS DO JOGO</text>
+    </g>
+
+    <rect x="60" y="395" width="960" height="600" rx="40" fill="#3cc8ff" opacity=".35" filter="url(#softglow)"/>
+    <rect x="60" y="395" width="960" height="600" rx="40" fill="#080c1e" fill-opacity=".88"/>
+    <rect class="panel-border" x="60" y="395" width="960" height="600" rx="40" fill="none" stroke="#5adcff" stroke-width="5"/>
+
+    <!-- regra 1: LIKE -->
+    <g transform="translate(0 470)"><g class="row r1">
+      <rect x="90" width="900" height="160" rx="28" fill="#fff" fill-opacity=".05"/>
+      <g class="hl"><rect x="90" width="900" height="160" rx="28" fill="#fff" fill-opacity=".1" stroke="var(--like)" stroke-width="5"/></g>
+      <circle cx="180" cy="80" r="62" fill="var(--like)" filter="url(#glow)"/>
+      <g transform="translate(180 82) scale(1.15)" fill="#fff"><rect x="-18" y="-6" width="52" height="46" rx="10"/><rect x="-10" y="-48" width="22" height="48" rx="10" transform="rotate(-14 0 0)"/><rect x="-36" y="-4" width="14" height="44" fill="var(--like)"/></g>
+      <text x="272" y="50" font-family="'Inter Display',Inter,sans-serif" font-weight="900" font-size="40" fill="var(--like)">LIKE</text>
+      <text x="272" y="102" font-family="Inter,sans-serif" font-weight="800" font-size="44" fill="#fff">+1 Lançamento Contabilístico</text>
+      <text x="272" y="142" font-family="Inter,sans-serif" font-weight="600" font-size="32" fill="#fff" fill-opacity=".7">(Débito / Crédito)</text>
+    </g></g>
+    <!-- regra 2: COMENTÁRIO -->
+    <g transform="translate(0 650)"><g class="row r2">
+      <rect x="90" width="900" height="160" rx="28" fill="#fff" fill-opacity=".05"/>
+      <g class="hl"><rect x="90" width="900" height="160" rx="28" fill="#fff" fill-opacity=".1" stroke="var(--comment)" stroke-width="5"/></g>
+      <circle cx="180" cy="80" r="62" fill="var(--comment)" filter="url(#glow)"/>
+      <g transform="translate(180 82) scale(1.15)"><rect x="-40" y="-32" width="80" height="58" rx="18" fill="#fff"/><path d="M-18 24L-30 44 2 24Z" fill="#fff"/><circle cx="-18" cy="-3" r="6" fill="var(--comment)"/><circle cy="-3" r="6" fill="var(--comment)"/><circle cx="18" cy="-3" r="6" fill="var(--comment)"/></g>
+      <text x="272" y="50" font-family="'Inter Display',Inter,sans-serif" font-weight="900" font-size="40" fill="var(--comment)">COMENTÁRIO</text>
+      <text x="272" y="102" font-family="Inter,sans-serif" font-weight="800" font-size="44" fill="#fff">+1 Diário Completo</text>
+      <text x="272" y="142" font-family="Inter,sans-serif" font-weight="600" font-size="32" fill="#fff" fill-opacity=".7">do Caderno</text>
+    </g></g>
+    <!-- regra 3: REPOST -->
+    <g transform="translate(0 830)"><g class="row r3">
+      <rect x="90" width="900" height="160" rx="28" fill="#fff" fill-opacity=".05"/>
+      <g class="hl"><rect x="90" width="900" height="160" rx="28" fill="#fff" fill-opacity=".1" stroke="var(--repost)" stroke-width="5"/></g>
+      <circle cx="180" cy="80" r="62" fill="var(--repost)" filter="url(#glow)"/>
+      <g transform="translate(180 82) scale(1.15)" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"><path d="M-34 8V-14H26"/><path d="M34 -8V14H-26"/><path d="M22 -28L40 -14 22 0Z" fill="#fff" stroke="none"/><path d="M-22 0L-40 14-22 28Z" fill="#fff" stroke="none"/></g>
+      <text x="272" y="50" font-family="'Inter Display',Inter,sans-serif" font-weight="900" font-size="40" fill="var(--repost)">REPOST</text>
+      <text x="272" y="102" font-family="Inter,sans-serif" font-weight="800" font-size="44" fill="#fff">+1 Hora de Estudo</text>
+      <text x="272" y="142" font-family="Inter,sans-serif" font-weight="600" font-size="32" fill="#fff" fill-opacity=".7">Teórico</text>
+    </g></g>
+
+    <!-- CTA -->
+    <g class="cta" font-family="Inter,sans-serif" font-weight="800" font-size="40" text-anchor="middle">
+      <rect x="62" y="1026" width="956" height="62" rx="16" fill="var(--gold)"/>
+      <text x="540" y="1072" fill="#111">O que fizerem neste vídeo dita o estudo</text>
+      <rect x="52" y="1084" width="976" height="62" rx="16" fill="var(--gold)"/>
+      <text x="540" y="1130" fill="#111">de amanhã. Quantos lançamentos ele faz hoje?</text>
+    </g>
+
+    <text class="levelup" x="540" y="1830" text-anchor="middle" font-family="'Inter Display',Inter,sans-serif" font-weight="900" font-size="96" fill="#ffe04a" stroke="#111" stroke-width="14" paint-order="stroke" transform="rotate(-3 540 1800)">LEVEL UP!</text>
+  </g>
+
+  <rect width="1080" height="1920" fill="url(#vig)" pointer-events="none"/>
+</svg>
+</div>
+</body>
+</html>
