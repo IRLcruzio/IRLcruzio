@@ -1,8 +1,11 @@
 """Banda sonora do reel ISCAC · DIA 1 (45 s) -> WAV estéreo 44.1 kHz.
-Uso: python3 audio.py saida.wav
+Uso: python3 audio.py saida.wav [--sem-musica]
 """
 import sys, wave
 import numpy as np
+
+# --sem-musica: só efeitos sonoros (sem batida/baixo/tic-tac de fundo)
+MUSIC = '--sem-musica' not in sys.argv
 
 SR = 44100
 DUR = 45.0
@@ -58,7 +61,7 @@ def thud(at, g=.6):
 
 # --- 0-29.3: batida lo-fi de estudo com tic-tac (para no PUM!) ---
 bpm = 92; b = 60 / bpm; x = 0.25; bass = [55, 55, 65.4, 49]; i = 0
-while x < 29.25:
+while MUSIC and x < 29.25:
     fast = 23.4 <= x < 26.4  # time-lapse: hi-hats a dobrar
     put(kick(), x, .55 if i % 4 in (0, 2) else 0)
     put(snare(), x, .35 if i % 4 in (1, 3) else 0)
@@ -124,7 +127,7 @@ for at, f0, f1, du in ((32.9, 233, 226, .6), (33.6, 220, 213, .6), (34.3, 207, 2
 for k_ in range(3): put(np.sign(np.sin(2 * np.pi * (880 if k_ % 2 == 0 else 660) * tt(.22))) * .4, 37.0 + k_ * .24, .15)
 for k_, f in enumerate((523.3, 659.3, 784, 1046.5, 1318.5)): put(tone(f, .35, 5, 'sq'), 37.78 + k_ * .07, .16)
 bpm = 128; b = 60 / bpm; x = 38.0; i = 0
-while x < 45:
+while MUSIC and x < 45:
     put(kick(), x, .6); put(hat(), x + b / 2, .2)
     if i % 2: put(snare(), x, .4)
     put(tone([65.4, 65.4, 77.8, 87.3][(i // 4) % 4], b, 3, 'sq'), x, .12)
