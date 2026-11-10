@@ -5,7 +5,7 @@
 <canvas id="c" width="1080" height="1920"></canvas>
 <script>
 // ISCAC · "Aquário" à noite · DIA 1 — reel de 30 s (1080x1920)
-const W=1080,H=1920,DURATION=30;
+const W=1080,H=1920,DURATION=45;
 const cv=document.getElementById('c'), ctx=cv.getContext('2d');
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const lerp=(a,b,t)=>a+(b-a)*t;
@@ -46,16 +46,8 @@ function drawRoom(t){
   ctx.lineWidth=11; ctx.beginPath(); ctx.moveTo(-62,-10); ctx.lineTo(-62,22); ctx.moveTo(62,-10); ctx.lineTo(62,22); ctx.stroke();
   ctx.font='700 46px "DejaVu Serif"'; ctx.textAlign='center'; ctx.fillStyle=`rgba(255,50,60,${fl})`; ctx.letterSpacing='10px'; ctx.fillText('ISCAC',6,86); ctx.restore();
   // digital clock: 02:47
-  ctx.fillStyle='#0d0b0b'; rrect(780,740,190,82,12); ctx.fill(); ctx.font='700 56px "JetBrains Mono"'; ctx.textAlign='center';
-  ctx.fillStyle='#ff4040'; ctx.shadowColor='rgba(255,40,40,.9)'; ctx.shadowBlur=14; ctx.fillText((Math.floor(t*1.5)%2)?'02:47':'02 47',875,800); ctx.shadowBlur=0;
-  // back row: lamp bar + table + calm students
-  ctx.fillStyle='#8f9296'; ctx.fillRect(-60,1018,1200,12); for(const x of [-20,1100]) ctx.fillRect(x,1018,8,100);
-  ctx.fillStyle='rgba(255,236,190,.9)'; ctx.fillRect(-60,1030,1200,4); glow(540,1090,700,'rgba(255,220,160,A)',.18);
-  const studs=[[120,0,'laptop'],[320,1.3,'phones'],[770,2.2,'read'],[960,3.1,'laptop']];
-  for(const [x,ph,k] of studs){ ctx.fillStyle='#5e1a24'; rrect(x-38,1040,76,80,10); ctx.fill(); }
-  for(const [x,ph,k] of studs) miniStudent(x,1062,t,ph,k);
-  ctx.fillStyle='#b99c74'; ctx.fillRect(-60,1112,1200,18); ctx.fillStyle='#86705a'; ctx.fillRect(-60,1130,1200,10);
-  for(const [x,ph,k] of studs){ if(k==='laptop'){ ctx.fillStyle='#9fb3c8'; ctx.fillRect(x-30,1080,60,32); glow(x,1095,90,'rgba(150,190,255,A)',.35);} }
+  ctx.fillStyle='#0d0b0b'; rrect(375,725,190,82,12); ctx.fill(); ctx.font='700 56px "JetBrains Mono"'; ctx.textAlign='center';
+  ctx.fillStyle='#ff4040'; ctx.shadowColor='rgba(255,40,40,.9)'; ctx.shadowBlur=14; ctx.fillText((Math.floor(t*1.5)%2)?CLOCK:CLOCK.replace(':',' '),470,785); ctx.shadowBlur=0;
   // interior floor
   const fg=ctx.createLinearGradient(0,1140,0,1660); fg.addColorStop(0,'#2e2721'); fg.addColorStop(1,'#1c1815'); ctx.fillStyle=fg; ctx.fillRect(-600,1140,W+1200,560);
 }
@@ -161,6 +153,7 @@ function drawDesk(t,P){
   const papers=[[300,1400,.25],[420,1350,-.2],[700,1420,.15],[620,1360,-.4],[240,1440,-.1],[820,1440,.3]];
   papers.forEach(([x,y,a],i)=>{ ctx.save(); ctx.translate(x,y); ctx.rotate(a+Math.sin(t*.5+i)*.004); ctx.fillStyle=i%2?'#f6f4ee':'#eeeadf'; ctx.fillRect(-70,-24,140,48);
     ctx.strokeStyle='rgba(60,60,90,.35)'; ctx.lineWidth=2; for(let k=0;k<4;k++){ ctx.beginPath(); ctx.moveTo(-60,-14+k*10); ctx.lineTo(50-hash(i+k)*40,-14+k*10); ctx.stroke(); } ctx.restore(); });
+  const extra=Math.floor((P.mess||0)*8); for(let i=0;i<extra;i++){ ctx.save(); ctx.translate(140+hash(i+40)*720,1345+hash(i+50)*95); ctx.rotate((hash(i+60)-.5)*1.4); ctx.fillStyle='#f1eee4'; ctx.fillRect(-60,-20,120,40); ctx.restore(); }
   // calculator
   ctx.save(); ctx.translate(950,1385); ctx.rotate(.18); ctx.fillStyle='#24262b'; rrect(-36,-30,72,60,8); ctx.fill(); ctx.fillStyle='#9fc3a0'; ctx.fillRect(-28,-24,56,14); ctx.restore();
   // coffee tower
@@ -332,59 +325,196 @@ function sticker(text,y,lt,dur,opts={}){
     ctx.fillStyle=opts.fg||'#111'; ctx.textAlign='left'; ctx.fillText(vis,540-w/2,yy); ctx.textAlign='center'; });
   ctx.restore(); }
 
-// ================= TIMELINE =================
+// ================= NOVAS CENAS (exercícios de CF I / SNC) =================
+let CLOCK='02:47';
+function warmBG(t){ ctx.fillStyle='#2a2119'; ctx.fillRect(-100,-100,W+200,H+200);
+  const wg=ctx.createLinearGradient(0,0,0,1500); wg.addColorStop(0,'#2b241e'); wg.addColorStop(1,'#5d4f42'); ctx.fillStyle=wg; ctx.fillRect(-100,-100,W+200,1600);
+  for(const [x,y,r] of [[200,300,320],[880,260,280],[540,800,460]]) glow(x,y,r,'rgba(255,215,150,A)',.3);
+  const tg=ctx.createLinearGradient(0,1500,0,1920); tg.addColorStop(0,'#d8b98c'); tg.addColorStop(1,'#b8966a'); ctx.fillStyle=tg; ctx.fillRect(-100,1500,W+200,520); ctx.fillStyle='#a3825a'; ctx.fillRect(-100,1500,W+200,10); }
+function stamp(text,lt,y,size=120,rot=-.2,col='#e01b2a'){ const p=clamp(lt/.18); if(p<=0) return; ctx.save(); ctx.translate(540,y); ctx.rotate(rot); const s=lerp(3,1,easeOut(p)); ctx.scale(s,s); ctx.globalAlpha=p;
+  ctx.font=`900 ${size}px "Inter Display"`; ctx.textAlign='center'; const lines=text.split('\n'); const w=Math.max(...lines.map(l=>ctx.measureText(l).width)); const h=lines.length*size*1.05;
+  ctx.fillStyle='rgba(255,255,255,.85)'; rrect(-w/2-40,-size*.95,w+80,h+30,24); ctx.fill(); ctx.strokeStyle=col; ctx.lineWidth=14; ctx.stroke();
+  ctx.fillStyle=col; lines.forEach((l,i)=>ctx.fillText(l,0,i*size*1.05)); ctx.restore(); }
+function stickHand(x,y,fromX,fromY,col=INK){ ctx.strokeStyle=col; ctx.lineWidth=26; ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(fromX,fromY); ctx.stroke(); ctx.fillStyle=col; ctx.beginPath(); ctx.arc(x,y,34,0,7); ctx.fill(); }
+
+// Exercício IVA: 1 000 € + IVA 23% -> João faz 1000 × 23
+const KEYS=[['C','%','÷','×'],['7','8','9','−'],['4','5','6','+'],['1','2','3','='],['0','00','.','=']];
+function keyPos(k){ for(let r=0;r<5;r++) for(let c=0;c<4;c++) if(KEYS[r][c]===k) return [540-165+c*110, 1330-110+r*95]; return [540,1330]; }
+function insertIVA(t,lt){
+  const boom=lt>2.0; ctx.save(); cam(1,540,960,boom?(lt<2.4?30:8):2,t); woodBG(t);
+  ctx.save(); ctx.translate(540,655); ctx.rotate(-.03); ctx.fillStyle='#fdfcf8'; ctx.shadowColor='rgba(0,0,0,.35)'; ctx.shadowBlur=30; ctx.fillRect(-410,-225,820,440); ctx.shadowBlur=0;
+  ctx.textAlign='left'; ctx.fillStyle='#222'; ctx.font='900 46px "Inter Display"'; ctx.fillText('Exercício 3',-360,-150);
+  ctx.font='600 36px "Inter"'; ctx.fillText('Compra de mercadorias a crédito:',-360,-90);
+  ctx.font='900 58px "Inter Display"'; ctx.fillStyle='#1d3f74'; ctx.fillText('1 000 € + IVA (23%)',-360,-25);
+  ctx.font='600 30px "JetBrains Mono"'; ctx.fillStyle='rgba(0,0,0,.55)'; ctx.fillText('D 31 · D 2432 · C 221 = ?',-360,45);
+  if(lt>2.5){ ctx.save(); ctx.rotate(-.05); ctx.font='italic 800 44px "Inter"'; ctx.fillStyle='#d61e2b'; const s='IVA = 230 € (não 23 000!)'; ctx.fillText(s.slice(0,Math.floor(clamp((lt-2.5)/.5)*s.length)),-340,140); ctx.restore(); }
+  ctx.restore();
+  // calculator
+  const seq=[['1',.1],['0',.25],['0',.4],['0',.55],['×',.8],['2',1.0],['3',1.15],['=',1.4]];
+  let disp='0', last=null; for(const [k,at] of seq) if(lt>=at){ last=[k,at]; if(k==='=') disp='23000'; else disp=(disp==='0'?'':disp)+k; }
+  if(boom) disp=(Math.floor(t*6)%2)?'ERR':'';
+  ctx.save(); ctx.translate(540,1330); ctx.rotate(.04); ctx.translate(-540,-1330);
+  ctx.fillStyle='#23252b'; rrect(280,920,520,800,44); ctx.fill(); ctx.fillStyle='#a9c7a4'; rrect(320,960,440,130,16); ctx.fill();
+  ctx.font='700 84px "JetBrains Mono"'; ctx.textAlign='right'; ctx.fillStyle=boom?'#8a1010':'#1d2a1d'; ctx.fillText(disp,740,1055);
+  for(let r=0;r<5;r++) for(let c=0;c<4;c++){ const k=KEYS[r][c]; const [x,y]=keyPos(k); if(r===4&&c===3) continue; const pressed=last&&last[0]===k&&lt-last[1]<.12;
+    ctx.fillStyle=k==='='?'#ff8a1f':(isNaN(+k)&&k!=='00'&&k!=='.'?'#4a4e57':'#e9e6df'); if(pressed) ctx.fillStyle='#ffd23f';
+    rrect(x-48,y-38+(pressed?6:0),96,76,14); ctx.fill(); ctx.font='800 40px "Inter"'; ctx.textAlign='center'; ctx.fillStyle=k==='='||isNaN(+k)&&k!=='00'&&k!=='.'?'#fff':'#222'; ctx.fillText(k,x,y+14+(pressed?6:0)); }
+  ctx.restore();
+  if(!boom){ const tgt=last?keyPos(last[0]):[700,1500]; const nxt=seq.find(s=>s[1]>lt); const np=nxt?keyPos(nxt[0]):tgt; const f=last&&nxt?ease(clamp((lt-last[1])/(nxt[1]-last[1]))):1;
+    const hx=lerp(tgt[0],np[0],f), hy=lerp(tgt[1],np[1],f)-(1-Math.abs(f*2-1))*40+30; stickHand(hx,hy,hx+600,hy+700); }
+  if(boom){ for(let i=0;i<10;i++){ const k=((lt-2)*.9+i/10)%1; ctx.fillStyle=`rgba(60,60,60,${.6*(1-k)})`; ctx.beginPath(); ctx.arc(540+(hash(i)-.5)*400+Math.sin(k*5+i)*40,950-k*500,40+k*90,0,7); ctx.fill(); } }
+  ctx.restore();
+  if(lt>1.45) popLabel('IVA = 23 000 €?!',540,880,lt-1.45,'#ffd23f',-.05);
+}
+// Balanço: Ativo vs Passivo + Capital Próprio — não bate por 1 cêntimo
+function insertBalanca(t,lt){
+  ctx.save(); cam(1,540,960,lt>1.3&&lt<1.7?22:2,t); warmBG(t);
+  const piv=[540,760]; let a=-.06+Math.sin(lt*3)*.015;
+  if(lt>1.25){ const k=lt-1.25; a=.42-.5*Math.exp(-k*5)*Math.cos(k*16); }
+  // base + post
+  ctx.fillStyle='#b8a06a'; ctx.beginPath(); ctx.moveTo(400,1500); ctx.lineTo(680,1500); ctx.lineTo(600,1440); ctx.lineTo(480,1440); ctx.fill(); ctx.fillRect(525,780,30,665);
+  // beam
+  ctx.save(); ctx.translate(...piv); ctx.rotate(a); ctx.fillStyle='#d9c27e'; rrect(-400,-14,800,28,14); ctx.fill(); ctx.restore();
+  ctx.fillStyle='#e8d08a'; ctx.beginPath(); ctx.arc(...piv,26,0,7); ctx.fill();
+  const ends=[-1,1].map(s=>[piv[0]+Math.cos(a)*380*s, piv[1]+Math.sin(a)*380*s]);
+  const labels=[['ATIVO','12 500,00 €','#2e9e5b'],['PASSIVO + CP','12 499,99 €','#c0392b']];
+  ends.forEach(([ex,ey],i)=>{ const py=ey+300; ctx.strokeStyle='#8c7a4a'; ctx.lineWidth=4; ctx.beginPath(); ctx.moveTo(ex,ey); ctx.lineTo(ex-150,py); ctx.moveTo(ex,ey); ctx.lineTo(ex+150,py); ctx.stroke();
+    // sign standing on the pan
+    ctx.fillStyle='#fbfaf5'; rrect(ex-150,py-150,300,140,16); ctx.fill(); ctx.textAlign='center'; ctx.font='900 40px "Inter Display"'; ctx.fillStyle=labels[i][2]; ctx.fillText(labels[i][0],ex,py-95); ctx.font='800 40px "JetBrains Mono"'; ctx.fillStyle='#222'; ctx.fillText(labels[i][1],ex,py-40);
+    if(i===1&&lt>1.25){ ctx.fillStyle='#f4f1ea'; ctx.beginPath(); ctx.moveTo(ex+60,py-150); ctx.lineTo(ex+110,py-150); ctx.lineTo(ex+118,py-215); ctx.lineTo(ex+52,py-215); ctx.fill(); ctx.fillStyle='#8a5a33'; ctx.fillRect(ex+54,py-195,62,16); }
+    ctx.fillStyle='#d9c27e'; ctx.beginPath(); ctx.ellipse(ex,py,170,34,0,0,Math.PI); ctx.fill(); ctx.fillRect(ex-170,py-4,340,8); });
+  // João's hand brings a coffee cup to "balance" it
+  if(lt>.5&&lt<1.6){ const k=ease(prog(lt,.5,1.2)); const [ex,ey]=ends[1]; const hx=lerp(1200,ex+85,k), hy=lerp(700,ey+300-235,k);
+    if(lt<1.25){ ctx.fillStyle='#f4f1ea'; ctx.beginPath(); ctx.moveTo(hx-25,hy+80); ctx.lineTo(hx+25,hy+80); ctx.lineTo(hx+33,hy+15); ctx.lineTo(hx-33,hy+15); ctx.fill(); ctx.fillStyle='#8a5a33'; ctx.fillRect(hx-31,hy+35,62,16); }
+    stickHand(hx,hy,hx+500,hy-400); }
+  ctx.restore();
+  if(lt<1.25&&lt>.1) popLabel('−0,01 €',540,520,lt-.1,'#ff6b6b',.05);
+  if(lt>1.45) stamp('O BALANÇO\nNÃO BATE!',lt-1.45,560,100,-.12);
+}
+// Inventários: FIFO vs LIFO (LIFO não é permitido no SNC — NCRF 18)
+function insertFIFO(t,lt){
+  ctx.save(); cam(1,540,960,lt>1.2&&lt<1.5?24:(lt>2.1&&lt<2.5?30:2),t); warmBG(t);
+  ctx.fillStyle='#fbfaf5'; ctx.save(); ctx.translate(540,600); ctx.rotate(-.02); rrect(-360,-80,720,160,20); ctx.fill(); ctx.textAlign='center'; ctx.fillStyle='#222'; ctx.font='900 50px "Inter Display"'; ctx.fillText('Inventário — FIFO',0,-8); ctx.font='600 32px "Inter"'; ctx.fillStyle='#666'; ctx.fillText('(First In, First Out)',0,44); ctx.restore();
+  const lots=[['LOTE 1','JAN · 10 €'],['LOTE 2','FEV · 11 €'],['LOTE 3','MAR · 12 €'],['LOTE 4','ABR · 13 €']];
+  const collapse=prog(lt,2.1,2.7);
+  lots.forEach(([a,b],i)=>{ let x=540, y=1500-90-i*175, r=0;
+    if(i===3){ const k=ease(prog(lt,.4,1.0)); y-=k*130; x+=k*60; }
+    if(collapse>0){ const g=collapse*collapse; x+=(i-1.2)*170*collapse+(i===3?150*collapse:0); r=(i-1.5)*.7*collapse; y=lerp(y,1500-90-(i%2)*60,Math.min(1,g*1.3)); }
+    ctx.save(); ctx.translate(x,y); ctx.rotate(r); ctx.fillStyle=['#b98b4f','#a77b44','#c49758','#ad8048'][i]; rrect(-170,-85,340,170,10); ctx.fill();
+    ctx.strokeStyle='rgba(0,0,0,.25)'; ctx.lineWidth=4; ctx.beginPath(); ctx.moveTo(-170,-30); ctx.lineTo(170,-30); ctx.stroke(); ctx.fillStyle='#e9d9a8'; ctx.fillRect(-30,-85,60,55);
+    ctx.textAlign='center'; ctx.fillStyle='#2a1a0a'; ctx.font='900 42px "Inter Display"'; ctx.fillText(a,0,22); ctx.font='700 30px "Inter"'; ctx.fillText(b,0,62); ctx.restore(); });
+  if(lt<.4){ ctx.font='900 40px "Inter"'; ctx.fillStyle='#ffd23f'; ctx.textAlign='left'; ctx.fillText('← sai primeiro',740,1430); }
+  if(lt>.3&&lt<1.4){ const k=ease(prog(lt,.3,.6)); const hx=lerp(1150,560,k), hy=lerp(700,1500-90-3*175-90-ease(prog(lt,.4,1.0))*130,k); stickHand(hx,hy,hx+500,hy-500); }
+  ctx.restore();
+  if(lt>1.2) stamp('LIFO?!\nPROIBIDO NO SNC',lt-1.2,800,92,-.1);
+  if(lt>2.4) popLabel('(NCRF 18)',540,1090,lt-2.4,'#fff',.04);
+}
+
+// Slot machine do Plano de Contas (pensamento do João)
+const ACC=['11 · Caixa','12 · Depósitos','21 · Clientes','22 · Fornecedores','24 · Estado','31 · Compras','62 · FSE','71 · Vendas'];
+function slotBubble(t,lt){
+  const a=clamp(lt/.3); if(a<=0) return; ctx.save(); ctx.globalAlpha=a;
+  ctx.fillStyle='#fff'; for(const [x,y,r] of [[560,960,14],[590,915,20],[620,860,26]]){ ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); }
+  const s=back(clamp(lt/.4)); ctx.translate(540,650); ctx.scale(s,s);
+  ctx.fillStyle='#fff'; for(const [x,y,r] of [[-230,-40,110],[-110,-110,120],[40,-120,125],[190,-60,115],[240,60,95],[100,120,115],[-80,125,110],[-230,80,100],[0,0,170]]){ ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); }
+  ctx.textAlign='center'; ctx.fillStyle='#111'; ctx.font='900 46px "Inter Display"'; ctx.fillText('Conta 22 = ?',0,-120);
+  ctx.fillStyle='#1b1d22'; rrect(-260,-75,520,150,22); ctx.fill();
+  ctx.save(); rrect(-250,-65,500,130,16); ctx.clip(); ctx.fillStyle='#fff7e0'; ctx.fillRect(-250,-65,500,130);
+  const stopAt=2.6; const items=ACC.concat(['CAFÉ ☕']); const N=items.length;
+  // decelerating reel that lands on the last item (CAFÉ)
+  const total=N*3-1; const k=clamp(lt/stopAt); const pos=total*(1-Math.pow(1-k,3));
+  const base=Math.floor(pos);
+  for(let i=-1;i<=1;i++){ const idx=base+i, off=i-(pos-base); const label=items[((idx%N)+N)%N];
+    ctx.font='900 58px "Inter Display"'; ctx.fillStyle=label.startsWith('CAFÉ')?'#8a5a33':'#1d3f74'; ctx.fillText(label,0,20+off*110); }
+  const g=ctx.createLinearGradient(0,-65,0,65); g.addColorStop(0,'rgba(0,0,0,.45)'); g.addColorStop(.3,'rgba(0,0,0,0)'); g.addColorStop(.7,'rgba(0,0,0,0)'); g.addColorStop(1,'rgba(0,0,0,.45)'); ctx.fillStyle=g; ctx.fillRect(-250,-65,500,130);
+  ctx.restore();
+  if(lt>stopAt+.15){ const q=clamp((lt-stopAt-.15)/.15); ctx.save(); ctx.globalAlpha=a*q; ctx.strokeStyle='#e01b2a'; ctx.lineWidth=18; ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(-120,-60); ctx.lineTo(120,60); ctx.moveTo(120,-60); ctx.lineTo(-120,60); ctx.stroke();
+    ctx.font='800 34px "Inter"'; ctx.fillStyle='#1c7c3c'; ctx.globalAlpha=a*clamp((lt-stopAt-.5)/.2); ctx.fillText('(era Fornecedores...)',0,135); ctx.restore(); }
+  ctx.restore();
+}
+// Barra de energia: depreciação em quotas constantes
+function energyBar(t,lt){
+  const steps=Math.min(4,Math.floor(lt/.6)); const v=1-steps*.2; const flash=(lt%.6)<.15&&steps>0;
+  ctx.save(); ctx.translate(260,1545); ctx.fillStyle='rgba(0,0,0,.72)'; rrect(0,0,560,118,18); ctx.fill();
+  ctx.font='900 30px "Inter Display"'; ctx.fillStyle='#fff'; ctx.textAlign='left'; ctx.fillText('ENERGIA DO JOÃO',20,40);
+  ctx.font='700 24px "Inter"'; ctx.fillStyle='#ffd23f'; ctx.fillText('Depreciação: −20%/h (quotas constantes)',20,74);
+  ctx.fillStyle='#333'; rrect(20,86,520,20,10); ctx.fill(); ctx.fillStyle=v>.4?'#2ee07a':(v>.2?'#ffb03a':'#ff3b4f'); rrect(20,86,520*v,20,10); ctx.fill();
+  if(flash){ ctx.font='900 40px "Inter Display"'; ctx.fillStyle='#ff3b4f'; ctx.textAlign='right'; ctx.fillText('−20%',540,46); }
+  ctx.restore();
+}
+// Time-lapse: 02:47 -> 04:12, a torre de cafés cresce
+function timelapse(t,lt){
+  const k=clamp(lt/2.6); const m=167+Math.floor(85*k); CLOCK=String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
+  const pose=Math.floor(lt/.33)%4; let P={arms:restArms(),eyes:'normal',mouth:'flat',cups:7+Math.floor(k*3.99),sweat:true,mess:k};
+  if(pose===0){ P.arms={L:{e:[400,1180],h:[465,1040]},R:{e:[680,1180],h:[615,1040]}}; P.eyes='wide'; P.mouth='scream'; }
+  if(pose===1){ P.dy=150; P.tilt=.5; P.eyes='blink'; P.mouth='o'; }
+  if(pose===2){ P.eyes='droopy'; P.mouth='wobble'; P.steam=true; }
+  if(pose===3){ P.eyes='determined'; P.brows=-.4; P.arms.R={e:[700,1290],h:[640+Math.sin(t*60)*30,1380]}; }
+  ctx.save(); cam(1.12,540,1010,0,t); world(t,P); ctx.restore();
+  ctx.save(); ctx.font='900 48px "JetBrains Mono"'; ctx.textAlign='left'; ctx.fillStyle='#fff'; ctx.globalAlpha=Math.floor(t*4)%2?1:.6; ctx.fillText('▶▶ x60',70,500); ctx.restore();
+  energyBar(t,lt);
+  for(let i=0;i<10;i++){ ctx.strokeStyle='rgba(255,255,255,.08)'; ctx.lineWidth=3; const y=hash(i+Math.floor(t*20))*H; ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+}
+
+// ================= TIMELINE (45 s) =================
+const SEG={hook:0,pen:9,T:11.3,iva:13.8,bal:17,fifo:20.2,lapse:23.4,cafe:26.4,squish:29.3,plead:31.9,hud:37};
 function render(t){
   ctx.setTransform(1,0,0,1,0,0); ctx.globalAlpha=1; ctx.globalCompositeOperation='source-over'; ctx.filter='none';
   ctx.fillStyle='#000'; ctx.fillRect(0,0,W,H);
-  smearA = t>20.9 ? .55 : 0;
-  let P={arms:restArms(),eyes:'normal',mouth:'flat',cups:6,sweat:true};
+  smearA = t>SEG.plead+.6 ? .55 : 0; CLOCK = t<SEG.lapse?'02:47':'04:12';
+  const after=t>=SEG.lapse; let P={arms:restArms(),eyes:'normal',mouth:'flat',cups:after?10:6,sweat:true,mess:after?1:0};
+  const S2='...e o João não sabe distinguir um Débito de um Crédito.', S3='IVA? Balanço? Inventários? Tudo errado.', S4='04:12. Faltam 5 dias. Nada bate certo.';
 
-  if(t<10){ // CENA 1 — hook + reveal
-    const blinkT=[1.2,1.35,2.1,2.25,6.5,6.62,8.7,8.82]; let bl=false; for(let i=0;i<blinkT.length;i+=2) if(t>blinkT[i]&&t<blinkT[i+1]) bl=true;
+  if(t<SEG.pen){
+    const blinkT=[1.2,1.35,2.1,2.25,6.5,6.62,8.1,8.22]; let bl=false; for(let i=0;i<blinkT.length;i+=2) if(t>blinkT[i]&&t<blinkT[i+1]) bl=true;
     P.eyes=bl?'blink':(t>1.5&&t<3?'confused':'normal'); P.look=t<3?[0,.6]:[Math.sin(t*.7)*.5,0]; P.qmarks=t>1.6&&t<3.2; P.brows=.3;
     P.paper=t<3.2?[540,1255]:null; if(P.paper){ P.arms={L:{e:[410,1300],h:[385,1260]},R:{e:[670,1300],h:[695,1260]}}; }
-    P.mouth=t>1.6&&t<3?'wobble':'flat';
-    let z,cy; if(t<3){ z=lerp(2.6,2.45,t/3); cy=1185; } else { const p=ease(prog(t,3,3.6)); z=lerp(2.45,1.0,p)+lerp(0,.07,prog(t,3.6,10)); cy=lerp(1185,960,p); }
+    P.mouth=t>1.6&&t<3?'wobble':'flat'; if(t>4.6&&t<8.9){ P.look=[.5,-.7]; P.brows=.5; } if(t>7.4&&t<8.9){ P.mouth='wobble'; P.arms={L:{e:[400,1230],h:[380,1170]},R:{e:[680,1230],h:[700,1170]}}; }
+    let z,cy; if(t<3){ z=lerp(2.6,2.45,t/3); cy=1185; } else { const p=ease(prog(t,3,3.6)); z=lerp(2.45,1.0,p)+lerp(0,.07,prog(t,3.6,9)); cy=lerp(1185,960,p); }
     ctx.save(); cam(z,540,cy,0,t); world(t,P); ctx.restore();
-    sticker('Faltam 5 dias para o exame de CF\u00a0I no ISCAC...',330,t-.3,9.4,{type:1.2});
-  } else if(t<12.3){ insertPen(t,t-10); sticker('...e o João não sabe distinguir um Débito de um Crédito.',330,t-10.2,9.6,{type:1.4}); }
-  else if(t<14.8){ insertT(t,t-12.3); sticker('...e o João não sabe distinguir um Débito de um Crédito.',330,t-10.2,9.6,{type:1.4}); }
-  else if(t<17.7){ // café de penálti -> wired -> slump -> slam
-    const lt=t-14.8;
-    if(lt<1.1){ const p=ease(prog(lt,0,.45)); P.cup=[lerp(860,610,p),lerp(1100,1110,p),lerp(0,-2.2,prog(lt,.45,.8))]; P.arms.R={e:[lerp(700,700,p),lerp(1290,1230,p)],h:[lerp(830,610,p),lerp(1120,1140,p)]};
-      P.tilt=-.25*prog(lt,.4,.7); P.mouth='o'; P.eyes='blink'; P.cups=5; }
-    else if(lt<2.1){ P.eyes='wide'; P.mouth='grit'; P.shake=26; P.zap=true; P.cups=7; P.brows=-.2; }
-    else { P.eyes='droopy'; P.mouth='flat'; P.cups=7; const k=prog(lt,2.1,2.9); P.dy=Math.pow(k,3)*40; P.tilt=Math.sin(lt*6)*.06; }
+    if(t>4.6&&t<8.9) slotBubble(t,t-4.6);
+    sticker('Faltam 5 dias para o exame de CF I no ISCAC...',330,t-.3,8.6,{type:1.2});
+  }
+  else if(t<SEG.T){ insertPen(t,t-SEG.pen); sticker(S2,330,t-SEG.pen-.2,4.6,{type:1.4}); }
+  else if(t<SEG.iva){ insertT(t,t-SEG.T); sticker(S2,330,t-SEG.pen-.2,4.6,{type:1.4}); }
+  else if(t<SEG.bal){ insertIVA(t,t-SEG.iva); sticker(S3,330,t-SEG.iva-.1,9.4,{type:1.2}); }
+  else if(t<SEG.fifo){ insertBalanca(t,t-SEG.bal); sticker(S3,330,t-SEG.iva-.1,9.4,{type:1.2}); }
+  else if(t<SEG.lapse){ insertFIFO(t,t-SEG.fifo); sticker(S3,330,t-SEG.iva-.1,9.4,{type:1.2}); }
+  else if(t<SEG.cafe){ timelapse(t,t-SEG.lapse); sticker(S4,330,t-SEG.lapse-.1,8.4,{type:1.0}); }
+  else if(t<SEG.squish){ const lt=t-SEG.cafe;
+    if(lt<1.1){ const p=ease(prog(lt,0,.45)); P.cup=[lerp(860,610,p),lerp(930,1110,p),lerp(0,-2.2,prog(lt,.45,.8))]; P.arms.R={e:[lerp(720,700,p),lerp(1150,1230,p)],h:[lerp(830,610,p),lerp(950,1140,p)]};
+      P.tilt=-.25*prog(lt,.4,.7); P.mouth='o'; P.eyes='blink'; P.cups=9; }
+    else if(lt<2.1){ P.eyes='wide'; P.mouth='grit'; P.shake=26; P.zap=true; P.cups=10; P.brows=-.2; }
+    else { P.eyes='droopy'; P.mouth='flat'; P.cups=10; const k=prog(lt,2.1,2.9); P.dy=Math.pow(k,3)*40; P.tilt=Math.sin(lt*6)*.06; }
     const lk=prog(lt,2.55,2.9); const z=lerp(1.75,1.75+lk*6,easeOut(lk)*lk); ctx.save(); cam(z,560,lerp(1180,1100,lk),lt>1.1&&lt<2.1?12:0,t); world(t,P); ctx.restore();
     if(lt<1.1&&lt>.5) popLabel('GLUP GLUP',540,1600,lt-.5,'#ffb03a',.06);
     if(lt>1.1&&lt<2.1) popLabel('CAFEÍNA 300%',540,1600,lt-1.1,'#ffe04a',-.05);
-    sticker('...e o João não sabe distinguir um Débito de um Crédito.',330,t-10.2,9.6,{type:1.4});
-    if(lt>2.82){ ctx.fillStyle=`rgba(255,255,255,${clamp((lt-2.82)/.08)})`; ctx.fillRect(0,0,W,H); }
-  } else if(t<20.3){ const lt=t-17.7; squish(t,lt,0); if(lt<.12){ ctx.fillStyle=`rgba(255,255,255,${1-lt/.12})`; ctx.fillRect(0,0,W,H); }
-    popLabel('PUM!',540,500,lt,'#fff',-.1); if(lt>.9) popLabel('*squeeeak*',540,1700,lt-.9,'#9fe3ff',.04);
-    sticker('...e o João não sabe distinguir um Débito de um Crédito.',330,t-10.2,9.6,{type:1.4}); }
-  else if(t<25){ const lt=t-20.3;
+    sticker(S4,330,t-SEG.lapse-.1,8.4,{type:1.0});
+    if(lt>2.82){ ctx.fillStyle=`rgba(255,255,255,${clamp((lt-2.82)/.08)})`; ctx.fillRect(0,0,W,H); } }
+  else if(t<SEG.plead){ const lt=t-SEG.squish; squish(t,lt,0); if(lt<.12){ ctx.fillStyle=`rgba(255,255,255,${1-lt/.12})`; ctx.fillRect(0,0,W,H); }
+    popLabel('PUM!',540,560,lt,'#fff',-.1); if(lt>.9) popLabel('*squeeeak*',540,1700,lt-.9,'#9fe3ff',.04);
+    sticker(S4,330,t-SEG.lapse-.1,8.4,{type:1.0}); }
+  else if(t<SEG.hud){ const lt=t-SEG.plead;
     if(lt<.6){ squish(t,2.6+lt*.2,easeOut(lt/.6)); popLabel('*plop*',540,1600,lt,'#fff',.05); }
     else { P.eyes='plead'; P.tears=true; P.brows=.7; P.mouth=lt>2.5?'wobble':'sad'; P.look=[0,0]; P.sweat=false;
       const sh=Math.sin(lt*8)*6; P.arms={L:{e:[425,1300],h:[527,1265+sh]},R:{e:[655,1300],h:[553,1265+sh]}}; P.dx=Math.sin(lt*30)*2;
-      ctx.save(); cam(lerp(1.55,1.95,ease(prog(lt,.6,4.7))),540,1130,0,t); world(t,P); ctx.restore(); }
-    sticker('Ele não vai sobreviver sozinho. O futuro dele está nas vossas mãos!',330,t-20.4,4.6,{type:1.5}); }
-  else { const lt=t-25; // CENA 4 — HUD reveal
-    const target=lt<1.3?-1:Math.floor((lt-1.3)/.45)%3;
-    P.headband=prog(lt,.15,.7); P.eyes='determined'; P.brows=-.55; P.mouth=lt<.8?'grit':'scream'; P.sweat=false; P.look=[.6,-.6]; P.cups=7;
+      ctx.save(); cam(lerp(1.55,1.95,ease(prog(lt,.6,4.9))),540,1130,0,t); world(t,P); ctx.restore(); }
+    sticker('Ele não vai sobreviver sozinho. O futuro dele está nas vossas mãos!',330,lt-.1,5,{type:1.5}); }
+  else { const lt=t-SEG.hud;
+    const target=lt<1.3?-1:Math.floor((lt-1.3)/.6)%3;
+    P.headband=prog(lt,.15,.7); P.eyes='determined'; P.brows=-.55; P.mouth=lt<.8?'grit':'scream'; P.sweat=false; P.look=[.6,-.6];
     const ty=target<0?300:ROW_Y[target]+80-260; const sh=[595,1213]; const ang=Math.atan2(ty-sh[1],(target<0?900:1000)-sh[0]); const jig=Math.sin(lt*40)*14;
     P.arms={L:{e:[430,1180],h:[455,1100+Math.sin(lt*14)*24],fist:true},R:{e:[sh[0]+Math.cos(ang)*120,sh[1]+Math.sin(ang)*120+jig*.4],h:[sh[0]+Math.cos(ang)*235,sh[1]+Math.sin(ang)*235+jig]}};
     P.shake=lt>.8?6:0;
     ctx.save(); cam(1.0,540,700,lt>.75&&lt<1.0?30:0,t); world(t,P); ctx.restore();
     ctx.fillStyle=`rgba(0,0,10,${.55*prog(lt,0,.6)})`; ctx.fillRect(0,0,W,H);
-    // re-draw João on top of the darkening so he stays bright (warrior spotlight)
     ctx.save(); cam(1.0,540,700,lt>.75&&lt<1.0?30:0,t); ctx.globalAlpha=prog(lt,0,.6); glow(540,1080,420,'rgba(255,60,60,A)',.25); drawJoao(t,P); drawArms(P,...P._h); ctx.restore();
     if(lt>.75&&lt<1.05){ ctx.fillStyle=`rgba(255,240,120,${.6*(1-(lt-.75)/.3)})`; ctx.fillRect(0,0,W,H); }
     if(lt>.75&&lt<1.6) popLabel('LEVEL UP!',540,1720,lt-.75,'#ffe04a',-.06);
     hud(t,lt,target);
-    sticker('O que fizerem neste vídeo dita o estudo de amanhã. Quantos lançamentos ele faz hoje?',1070,lt-1.9,10,{size:44,type:1.0,bg:'#ffd23f'});
+    if(lt<5.6) sticker('O que fizerem neste vídeo dita o estudo de amanhã. Quantos lançamentos ele faz hoje?',1070,lt-1.9,3.7,{size:44,type:1.0,bg:'#ffd23f'});
+    else { sticker('SEGUE para veres se ele sobrevive ao DIA 2 →',1090,lt-5.6,10,{size:46,type:.6,bg:'#ff2d55',fg:'#fff',weight:'900'}); }
   }
-  // global: grain + vignette
   ctx.save(); ctx.globalAlpha=.06; ctx.globalCompositeOperation='overlay'; ctx.drawImage(grains[Math.floor(t*24)%5],0,0,W,H); ctx.restore();
   const vg=ctx.createRadialGradient(W/2,H*.5,H*.3,W/2,H*.5,H*.75); vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,.55)'); ctx.fillStyle=vg; ctx.fillRect(0,0,W,H);
   if(t<.25){ ctx.fillStyle=`rgba(0,0,0,${1-t/.25})`; ctx.fillRect(0,0,W,H); }

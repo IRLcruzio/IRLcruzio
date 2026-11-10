@@ -1,6 +1,6 @@
 # ISCAC · "DIA 1" — Faltam 5 dias para CF I
 
-**Formato:** 9:16 (1080×1920), 30 fps, **30 s**
+**Formato:** 9:16 (1080×1920), 30 fps, **45 s**
 **Ficheiros:**
 - `iscac-dia1.mp4`: vídeo final animado, com som
 - `cena4.html`: frame-chave da Cena 4 em HTML/CSS + SVG, num único ficheiro e animado. Abre-se no browser.
@@ -27,31 +27,37 @@
 - **Relógio digital vermelho a marcar 02:47:** diz logo que é madrugada antes do exame, sem precisar de texto.
 - **Vinheta e grão de filme leve:** dão o tom "cinematográfico" pedido para os primeiros 25 s.
 
-### O contraste cómico
-- **À volta está tudo calmo:** 4 colegas em stickman pequeno, simples, a pestanejar devagar (um de headphones a abanar a cabeça, outros no portátil ou a ler).
-- **A mesa do João é o caos:** folhas espalhadas, **torre de 6→7 copos de café** a abanar, calculadora, lata de energético, livro "CF I" e o **calendário colado no vidro: "EXAME CF I – FALTAM 5 DIAS"**.
-- **O João** tem cabeça grande, traço grosso e expressões exageradas: **olheiras roxas sempre**, suor a escorrer, olhos que mudam (confuso, arregalado, a cair de sono, a implorar com lágrimas, determinado) e tremores.
+### Só o João no ecrã
+- **Uma única mesa** (a do João) e **nenhuma outra pessoa**: o Aquário está vazio de madrugada, o que reforça a solidão e o desespero.
+- **A mesa é o caos:** folhas espalhadas (multiplicam-se depois do time-lapse), **torre de cafés** que cresce de 6 para 10 copos até bater no candeeiro, calculadora, lata de energético, livro "CF I" e o **calendário colado no vidro: "EXAME CF I – FALTAM 5 DIAS"**.
+- **O João** tem cabeça grande, traço grosso e expressões exageradas: **olheiras roxas sempre**, suor, olhos que mudam (confuso, arregalado, a cair de sono, a implorar, determinado) e tremores.
 
 ---
 
-## 2. Pacing (retenção)
+## 2. Pacing (45 s)
 
 | Tempo | Cena | O que acontece | Truque de retenção |
 |---|---|---|---|
-| 0.0–3.0 | **1 · Hook** | Grande plano: o João olha para "Balanço e Demonstração de Resultados", pestaneja, aparecem "???" | O texto do hook aparece **logo aos 0,3 s** (estilo "sticker" de TikTok) |
-| 3.0–3.6 | 1 · Reveal | **Zoom out rápido** com "whoosh": afinal está no Aquário, de noite | Primeira quebra de padrão aos 3 s |
-| 3.6–10 | 1 · Contexto | Plano geral: os colegas calmos contra o caos do João, calendário "5 DIAS", relógio 02:47 | O espectador tem tempo para "ler" as piadas visuais |
-| 10–12.3 | **2 · Montagem** | Inserto: a caneta **não escreve** → "SEM TINTA?!" | Corte a cada ~2–2,5 s |
-| 12.3–14.8 | 2 | T de Razão: "DÉBITO" e "CRÉDITO" **trocam de lugar**, escreve "100 €" do lado errado → carimbo **ERRADO** + buzzer | Piada de nicho: quem estuda Contabilidade identifica-se |
-| 14.8–15.9 | 2 | Café de penálti: "GLUP GLUP" | |
-| 15.9–16.9 | 2 | "CAFEÍNA 300%": olhos arregalados, tremores, raios | |
-| 16.9–17.7 | 2 | Os olhos fecham e cai de cara para a câmara | Tensão física antes do impacto |
-| 17.7–20.3 | 2 · Clímax cómico | **"PUM!"**: cara esborrachada contra o vidro, mãos abertas, bafo no vidro, "*squeeeak*" a escorregar | O frame mais "printável" e partilhável |
-| 20.3–25 | **3 · Pedido** | "*plop*": descola-se. Fica a marca da cara no vidro. Olha para a câmara (4.ª parede), mãos juntas, lágrimas, trombone triste | Empatia e quebra da 4.ª parede preparam o CTA |
-| 25–25.8 | **4 · Revelação** | Ecrã escurece, alarme, a **fita "CF I" cai na cabeça** | Mudança de cor e de ritmo: "agora é a sério" |
-| 25.8–30 | 4 · HUD | **"LEVEL UP!"**, painel de regras com Like, Comentário e Repost. O João aponta freneticamente para cada regra, que acende à vez. CTA a amarelo | As regras só aparecem nos últimos ~4 s, como pedido |
+| 0.0–3.0 | **Hook** | Grande plano: o João olha para "Balanço e Demonstração de Resultados", aparecem "???" | Texto do hook logo aos 0,3 s |
+| 3.0–4.6 | Reveal | **Zoom out** com "whoosh": ele está sozinho no Aquário, às 02:47 | Primeira quebra de padrão aos 3 s |
+| 4.6–9.0 | **Plano de Contas** | Balão de pensamento com **slot machine**: "Conta 22 = ?" → a roleta abranda e para em "CAFÉ ☕" → ✗ "(era Fornecedores...)" | O plano geral, antes parado, passa a ter uma piada |
+| 9.0–11.3 | Caneta | "SEM TINTA?!" | Corte a cada 2–3 s até aos 29 s |
+| 11.3–13.8 | T de Razão | DÉBITO e CRÉDITO trocam de lugar → carimbo **ERRADO** | |
+| 13.8–17.0 | **IVA** | Exercício "1 000 € + IVA (23%)": tecla a tecla, faz **1000 × 23 = 23 000** → "IVA = 23 000 €?!" → a calculadora rebenta (ERR, fumo) → correção a vermelho: "IVA = 230 € (não 23 000!)" | Piada de nicho: quem estuda CF I comenta |
+| 17.0–20.2 | **Balanço** | Balança: ATIVO 12 500,00 € vs PASSIVO + CP 12 499,99 € (−0,01 €). Ele põe um café no prato para "equilibrar" → **O BALANÇO NÃO BATE!** | |
+| 20.2–23.4 | **Inventários** | Caixas FIFO (LOTE 1 a 4). Ele tira o de cima (LOTE 4) → **LIFO?! PROIBIDO NO SNC** (NCRF 18) → a pilha cai | Erro clássico de exame |
+| 23.4–26.4 | **Time-lapse** | ▶▶ x60. O relógio passa de 02:47 para 04:12, a torre de cafés cresce, as folhas multiplicam-se e muda de pose a cada 0,33 s. Barra **ENERGIA DO JOÃO** com "Depreciação: −20%/h (quotas constantes)" | Muda o ritmo e mostra o tempo a passar |
+| 26.4–29.3 | Café | "GLUP GLUP" → "CAFEÍNA 300%" → adormece e cai | |
+| 29.3–31.9 | **PUM!** | Cara esborrachada no vidro, "*squeeeak*" | Frame mais partilhável |
+| 31.9–37.0 | Pedido | "*plop*". A marca da cara fica no vidro. Olha para a câmara e implora, com trombone triste | Quebra da 4.ª parede |
+| 37.0–38.0 | **Revelação** | Ecrã escurece, alarme, fita "CF I" na cabeça, "LEVEL UP!" | Mudança de cor e de ritmo |
+| 38.0–42.6 | HUD | Painel com Like, Comentário e Repost. Ele aponta para cada regra e "Quantos lançamentos ele faz hoje?" | Regras só no fim, como pedido |
+| 42.6–45.0 | **Follow** | "SEGUE para veres se ele sobrevive ao DIA 2 →" | CTA para seguir, para a série ter continuidade |
 
-**Som:** batida lo-fi com tic-tac de relógio até ao "PUM!". Depois silêncio, chiado no vidro e trombone triste. No HUD, alarme, arpejo de "level up" e uma batida rápida de 128 bpm até ao fim.
+**Som:** batida lo-fi com tic-tac de relógio até ao "PUM!" (hi-hats a dobrar no time-lapse). Cada gag tem o seu efeito: roleta, teclas da calculadora com explosão, pancada da balança, caixas a cair, fita a acelerar. Depois silêncio, chiado no vidro e trombone triste. No HUD, alarme, arpejo de "level up" e uma batida rápida de 128 bpm até ao fim.
+
+### Exercícios de CF I usados
+O repositório **Vault** não tinha exercícios: só um README e um ficheiro com texto aleatório. Por isso usei exercícios típicos de CF I com o SNC: plano de contas (11, 12, 21, 22, 24, 31, 62, 71), compra a crédito com IVA a 23% (D 31 / D 2432 / C 221), equação do Balanço (Ativo = Passivo + Capital Próprio), inventários FIFO vs LIFO (NCRF 18) e depreciações em quotas constantes. Se puseres os teus exercícios no Vault, posso trocar os números e enunciados pelos teus.
 
 ---
 
